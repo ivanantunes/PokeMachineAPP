@@ -1,0 +1,32 @@
+.hr-spacer {
+  flex: 1 1 auto;
+}
+
+.hr-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 50%;
+}
+
+.hr-title {
+  color: white;
+  font-size: 25px;
+  font-family: 'pokemon-solid';
+  vertical-align: super;
+  text-shadow: 1px 1px 3px black;
+}
+
+.hr-link {
+  text-decoration: none;
+}
+
+.hr-row-one {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.hr-row-two {
+  background-color: red;
+  height: 10px;
+}

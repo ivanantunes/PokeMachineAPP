@@ -1,0 +1,110 @@
+<form class="form-container">
+
+  <h1 class="form-title">Dados do Cliente</h1>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>Nome Completo</mat-label>
+    <input matInput>
+    <mat-icon matSuffix class="form-input-icon">person</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>RG</mat-label>
+    <input matInput>
+    <mat-icon matSuffix class="form-input-icon">badge</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>CPF</mat-label>
+    <input matInput>
+    <mat-icon matSuffix class="form-input-icon">assignment</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>Data de Aniversário</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>Telefone</mat-label>
+    <input matInput>
+    <mat-icon matSuffix class="form-input-icon">call</mat-icon>
+  </mat-form-field>
+
+  <h1 class="form-title">Dados do Endereço</h1>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>CEP</mat-label>
+    <input matInput>
+    <mat-icon matSuffix class="form-input-icon">subtitles</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>Endereço</mat-label>
+    <input matInput [disabled]="true">
+    <mat-icon matSuffix class="form-input-icon">home</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>Cidade</mat-label>
+    <input matInput [disabled]="true">
+    <mat-icon matSuffix class="form-input-icon">apartment</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>Estado</mat-label>
+    <input matInput [disabled]="true">
+    <mat-icon matSuffix class="form-input-icon">location_city</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>UF</mat-label>
+    <input matInput [disabled]="true">
+    <mat-icon matSuffix class="form-input-icon">place</mat-icon>
+  </mat-form-field>
+
+  <h1 class="form-title">Dados da Conta</h1>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>Código</mat-label>
+    <input matInput [disabled]="true">
+    <mat-icon matSuffix class="form-input-icon">account_circle</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>Senha</mat-label>
+    <input matInput type="password">
+    <mat-icon matSuffix class="form-input-icon">lock</mat-icon>
+    <mat-hint>Senha para Acesso a Conta</mat-hint>
+
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>Tipo de Conta</mat-label>
+    <mat-select >
+      <mat-option value="P">Conta Poupança</mat-option>
+      <mat-option value="C">Conta Corrente</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>Saldo</mat-label>
+    <input matInput type="number">
+    <mat-icon matSuffix class="form-input-icon">paid</mat-icon>
+    <mat-hint>Saldo Inicial da Conta deve ser pelo menos R$ 1.00</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>Banco</mat-label>
+    <mat-select>
+      <mat-option value="99547">Banco do Brasil S.A</mat-option>
+      <mat-option value="19879">Itaú</mat-option>
+      <mat-option value="16794">Caixa Economica</mat-option>
+      <mat-option value="47244">Santander</mat-option>
+      <mat-option value="10547">Bradesco</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>

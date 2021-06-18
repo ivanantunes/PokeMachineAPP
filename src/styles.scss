@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+@include mat.core();
+
+@font-face {
+  font-family: 'pokemon-solid';
+  src: url('/assets/fonts/PokemonSolid.ttf') format('truetype');
+}
+
+$PokeMachineAPP-primary: mat.define-palette(mat.$indigo-palette);
+$PokeMachineAPP-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$PokeMachineAPP-warn: mat.define-palette(mat.$red-palette);
+
+$PokeMachineAPP-theme: mat.define-light-theme((
+  color: (
+    primary: $PokeMachineAPP-primary,
+    accent: $PokeMachineAPP-accent,
+    warn: $PokeMachineAPP-warn,
+  )
+));
+
+@include mat.all-component-themes($PokeMachineAPP-theme);
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
