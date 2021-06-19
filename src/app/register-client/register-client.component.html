@@ -1,110 +1,173 @@
-<form class="form-container">
+<form class="form-container" [formGroup]="register">
 
   <h1 class="form-title">Dados do Cliente</h1>
 
   <mat-form-field appearance="outline" class="form-input-full">
     <mat-label>Nome Completo</mat-label>
-    <input matInput>
+    <input matInput #fullname maxlength="80" required formControlName="cli_FULL_NAME">
     <mat-icon matSuffix class="form-input-icon">person</mat-icon>
+    <mat-hint align="end">{{fullname.value.length}} / 80</mat-hint>
+    <mat-error *ngIf="controls['cli_FULL_NAME'].errors && controls['cli_FULL_NAME'].errors.required">
+      Nome Completo é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>RG</mat-label>
-    <input matInput>
+    <input matInput #rg maxlength="15" required mask="00.000.000-00" formControlName="cli_RG">
     <mat-icon matSuffix class="form-input-icon">badge</mat-icon>
+    <mat-hint align="end">{{rg.value.length}} / 15</mat-hint>
+    <mat-error *ngIf="controls['cli_RG'].errors && controls['cli_RG'].errors.required">
+      RG é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
     <mat-label>CPF</mat-label>
-    <input matInput>
+    <input matInput #cpf maxlength="15" required mask="000.000.000-00" formControlName="cli_CPF">
     <mat-icon matSuffix class="form-input-icon">assignment</mat-icon>
+    <mat-hint align="end">{{cpf.value.length}} / 15</mat-hint>
+    <mat-error *ngIf="controls['cli_CPF'].errors && controls['cli_CPF'].errors.required">
+      CPF é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>Data de Aniversário</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <input matInput [matDatepicker]="date" required formControlName="cli_BIRTHDAY">
+    <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+    <mat-datepicker #date></mat-datepicker>
+    <mat-error *ngIf="controls['cli_BIRTHDAY'].errors && controls['cli_BIRTHDAY'].errors.required">
+      Data de Aniversário é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
     <mat-label>Telefone</mat-label>
-    <input matInput>
+    <input matInput #tel maxlength="20" required mask="(00) 0 0000-0000" formControlName="clt_TELEPHONE">
     <mat-icon matSuffix class="form-input-icon">call</mat-icon>
+    <mat-hint align="end">{{tel.value.length}} / 20</mat-hint>
+    <mat-error *ngIf="controls['clt_TELEPHONE'].errors && controls['clt_TELEPHONE'].errors.required">
+      Telefone é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <h1 class="form-title">Dados do Endereço</h1>
 
-  <mat-form-field appearance="outline" class="form-input-full">
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>CEP</mat-label>
-    <input matInput>
+    <input matInput #cep maxlength="45" required mask="00000-000" formControlName="cla_ZIP_CODE">
     <mat-icon matSuffix class="form-input-icon">subtitles</mat-icon>
+    <mat-hint align="end">{{cep.value.length}} / 45</mat-hint>
+    <mat-error *ngIf="controls['cla_ZIP_CODE'].errors && controls['cla_ZIP_CODE'].errors.required">
+      CEP é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>Endereço</mat-label>
+    <input matInput #address maxlength="150" required formControlName="cla_ADDRESS">
+    <mat-icon matSuffix class="form-input-icon">home</mat-icon>
+    <mat-hint align="end">{{address.value.length}} / 150</mat-hint>
+    <mat-error *ngIf="controls['cla_ADDRESS'].errors && controls['cla_ADDRESS'].errors.required">
+      Endereço é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
-    <mat-label>Endereço</mat-label>
-    <input matInput [disabled]="true">
-    <mat-icon matSuffix class="form-input-icon">home</mat-icon>
+    <mat-label>Número</mat-label>
+    <input matInput type="number" required min="0" step="1" formControlName="cla_NUMBER">
+    <mat-icon matSuffix class="form-input-icon">pin</mat-icon>
+    <mat-error *ngIf="controls['cla_NUMBER'].errors && controls['cla_NUMBER'].errors.required">
+      Número é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
     <mat-label>Cidade</mat-label>
-    <input matInput [disabled]="true">
+    <input matInput #city maxlength="80" required formControlName="cla_CITY">
     <mat-icon matSuffix class="form-input-icon">apartment</mat-icon>
+    <mat-hint align="end">{{city.value.length}} / 80</mat-hint>
+    <mat-error *ngIf="controls['cla_CITY'].errors && controls['cla_CITY'].errors.required">
+      Cidade é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
-    <mat-label>Estado</mat-label>
-    <input matInput [disabled]="true">
+    <mat-label>Bairro</mat-label>
+    <input matInput #districty maxlength="80" required formControlName="cla_DISTRICTY">
     <mat-icon matSuffix class="form-input-icon">location_city</mat-icon>
+    <mat-hint align="end">{{districty.value.length}} / 80</mat-hint>
+    <mat-error *ngIf="controls['cla_DISTRICTY'].errors && controls['cla_DISTRICTY'].errors.required">
+      Bairro é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
     <mat-label>UF</mat-label>
-    <input matInput [disabled]="true">
+    <input matInput #uf maxlength="2" required formControlName="cla_UF">
     <mat-icon matSuffix class="form-input-icon">place</mat-icon>
+    <mat-hint align="end">{{uf.value.length}} / 2</mat-hint>
+    <mat-error *ngIf="controls['cla_UF'].errors && controls['cla_UF'].errors.required">
+      UF é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <h1 class="form-title">Dados da Conta</h1>
 
-  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
-    <mat-label>Código</mat-label>
-    <input matInput [disabled]="true">
-    <mat-icon matSuffix class="form-input-icon">account_circle</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+  <mat-form-field appearance="outline" class="form-input-full">
     <mat-label>Senha</mat-label>
-    <input matInput type="password">
+    <input matInput #password type="password" maxlength="32" required formControlName="acc_PASSWORD">
     <mat-icon matSuffix class="form-input-icon">lock</mat-icon>
-    <mat-hint>Senha para Acesso a Conta</mat-hint>
-
+    <mat-hint align="end">{{password.value.length}} / 32</mat-hint>
+    <mat-error *ngIf="controls['acc_PASSWORD'].errors && controls['acc_PASSWORD'].errors.required">
+      Senha é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>Tipo de Conta</mat-label>
-    <mat-select >
+    <mat-select required formControlName="acc_TYPE">
       <mat-option value="P">Conta Poupança</mat-option>
       <mat-option value="C">Conta Corrente</mat-option>
     </mat-select>
+    <mat-error *ngIf="controls['acc_TYPE'].errors && controls['acc_TYPE'].errors.required">
+      Tipo de Conta é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
     <mat-label>Saldo</mat-label>
-    <input matInput type="number">
+    <input matInput type="number" required min="1" value="1" step="1" formControlName="acc_BALANCE">
     <mat-icon matSuffix class="form-input-icon">paid</mat-icon>
     <mat-hint>Saldo Inicial da Conta deve ser pelo menos R$ 1.00</mat-hint>
+    <mat-error *ngIf="controls['acc_BALANCE'].errors && controls['acc_BALANCE'].errors.required">
+      Saldo é Obrigatório.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="form-input-full">
-    <mat-label>Banco</mat-label>
-    <mat-select>
+    <mat-label>Agência</mat-label>
+    <mat-select required formControlName="acc_AGE_ID">
       <mat-option value="99547">Banco do Brasil S.A</mat-option>
       <mat-option value="19879">Itaú</mat-option>
       <mat-option value="16794">Caixa Economica</mat-option>
       <mat-option value="47244">Santander</mat-option>
       <mat-option value="10547">Bradesco</mat-option>
     </mat-select>
+    <mat-error *ngIf="controls['acc_AGE_ID'].errors && controls['acc_AGE_ID'].errors.required">
+      Agência é Obrigatório.
+    </mat-error>
   </mat-form-field>
+
+  <button mat-raised-button color="primary" class="btn-margin-rigth" type="submit" [disabled]="register.invalid" (click)="submit()">
+    <mat-icon>add</mat-icon>
+    Cadastrar
+  </button>
+
+  <button mat-raised-button color="warn" (click)="register.reset()">
+    <mat-icon>clear</mat-icon>
+    Limpar Campos
+  </button>
 
 </form>

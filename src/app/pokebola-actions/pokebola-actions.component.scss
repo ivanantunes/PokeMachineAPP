@@ -14,6 +14,12 @@
   text-align: center;
 }
 
+.ball-container-mid {
+  float: left;
+  text-align: center;
+  margin: 20px;
+}
+
 .ball-red {
   display: inline-block;
   margin: 20px;
@@ -21,7 +27,7 @@
   height: 100px;
   background: #b71c1c;
   border-radius: 50%;
-  box-shadow:  inset 0 -72px 0 -37px #fff, inset 0 -76px 0 -35px #000, 0 0 0 5px #000;
+  box-shadow:  inset 0 -72px 0 -37px #fff, inset 0 -76px 0 -35px #000, 0 0 0 5px rgba(0, 0, 0, 0);
   position: relative;
   transition: .4s;
   transform-origin: bottom center;
@@ -73,7 +79,7 @@
   height: 100px;
   background: #FFF;
   border-radius: 50%;
-  box-shadow:  inset 0 -72px 0 -37px #fff, inset 0 -76px 0 -35px #b71c1c, 0 0 0 5px #b71c1c;
+  box-shadow:  inset 0 -72px 0 -37px #fff, inset 0 -76px 0 -35px #b71c1c, 0 0 0 5px rgba(0, 0, 0, 0);
   position: relative;
   transition: .4s;
   transform-origin: bottom center;
@@ -118,14 +124,23 @@
   }
 }
 
+.ball-subtitle {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
 .ball-cherish {
   display: inline-block;
   margin: 20px;
   width: 100px;
   height: 100px;
-  background: #b71c1c;
+  background: #1d8f2c;
   border-radius: 50%;
-  box-shadow:  inset 0 -72px 0 -37px #b71c1c, inset 0 -76px 0 -35px #000, 0 0 0 5px #000;
+  box-shadow:  inset 0 -72px 0 -37px #ffffff, inset 0 -76px 0 -35px #000, 0 0 0 5px rgba(0, 0, 0, 0);
   position: relative;
   transition: .4s;
   transform-origin: bottom center;
@@ -139,11 +154,11 @@
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: #b71c1c;
+    background: #fff;
     top: 50px;
     left: 40px;
     border: 1px solid rgba(0,0,0,.4);
-    box-shadow: 2px 0 0 0 rgba(0,0,0,0.2), 0 0 0 5px #b71c1c, 0 0 0 10px #000;
+    box-shadow: 2px 0 0 0 rgba(0,0,0,0.2), 0 0 0 5px #ffffff, 0 0 0 10px #000;
   }
 
   &:after {

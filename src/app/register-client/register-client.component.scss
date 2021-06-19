@@ -1,6 +1,6 @@
 .form-container {
   display: table;
-  width: 50%;
+  width: 65%;
   margin: auto;
 }
 
@@ -26,6 +26,10 @@
 
 .form-title {
   text-transform: uppercase;
+}
+
+.btn-margin-rigth {
+  margin-right: 15px;
 }
 
 @media (max-width: 600px) {

@@ -2,10 +2,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // ? Components
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+
+// ? Ngx
+import { NgxMaskModule } from 'ngx-mask';
 
 // ? Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -28,10 +32,14 @@ import { MatSelectModule } from '@angular/material/select';
     // * Angular
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
 
     // * Export Components
     HeaderComponent,
     FooterComponent,
+
+    // * Export Ngx
+    NgxMaskModule,
 
     // * Export Modules
     MatToolbarModule,
@@ -50,6 +58,10 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    HttpClientModule,
+
+    // * Ngx
+    NgxMaskModule.forRoot(),
 
     // * Material
     MatToolbarModule,
