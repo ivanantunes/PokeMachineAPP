@@ -15,6 +15,12 @@ const routes: Routes = [
     loadChildren: () => import('./register-client/register-client.module').then(m => m.RegisterClientModule)
   },
 
+  // ? Login
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+
   // ? Redirect
   {
     path: '**',

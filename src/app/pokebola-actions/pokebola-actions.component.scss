@@ -14,6 +14,10 @@
   text-align: center;
 }
 
+.ball-margin-top {
+  margin-top: 100px !important;
+}
+
 .ball-container-mid {
   float: left;
   text-align: center;
@@ -231,5 +235,11 @@
 
   100% {
     transform: translateX(0px) rotate(0deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .ball-margin-top {
+    margin-top: 0px !important;
   }
 }

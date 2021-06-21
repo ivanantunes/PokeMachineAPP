@@ -1,0 +1,34 @@
+<form class="form-container" [formGroup]="login">
+
+  <h1 class="form-title">Conectar-se</h1>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>Conta</mat-label>
+    <input matInput #code maxlength="15" required formControlName="acc_CODE">
+    <mat-icon matSuffix class="form-input-icon">vpn_key</mat-icon>
+    <mat-hint align="end">{{code.value.length}} / 15</mat-hint>
+    <mat-error *ngIf="controls['acc_CODE'].errors && controls['acc_CODE'].errors.required">
+      Conta é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>Senha</mat-label>
+    <input matInput #password maxlength="32" type="password" required formControlName="acc_PASSWORD">
+    <mat-icon matSuffix class="form-input-icon">lock</mat-icon>
+    <mat-hint align="end">{{password.value.length}} / 32</mat-hint>
+    <mat-error *ngIf="controls['acc_PASSWORD'].errors && controls['acc_PASSWORD'].errors.required">
+      Senha é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="btn-margin-rigth" type="submit" [disabled]="login.invalid" (click)="submit()">
+    <mat-icon>send</mat-icon>
+    Conectar
+  </button>
+
+  <button mat-raised-button color="warn" (click)="login.reset()">
+    <mat-icon>clear</mat-icon>
+    Limpar Campos
+  </button>
+</form>

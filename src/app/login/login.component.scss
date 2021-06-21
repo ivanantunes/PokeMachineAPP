@@ -1,0 +1,49 @@
+.form-container {
+  display: table;
+  width: 65%;
+  margin: auto;
+}
+
+.form-input-full {
+  width: 100%;
+}
+
+.form-input-mid {
+  width: 49%;
+}
+
+.form-margin-right {
+  float: left;
+}
+
+.form-margin-left {
+  float: right;
+}
+
+.form-input-icon {
+  color: gray;
+}
+
+.form-title {
+  text-transform: uppercase;
+}
+
+.btn-margin-rigth {
+  margin-right: 15px;
+}
+
+@media (max-width: 600px) {
+
+  .form-input-mid {
+    width: 100%;
+  }
+
+  .form-margin-left {
+    float: none;
+  }
+
+  .form-margin-right {
+    float: none;
+  }
+
+}
