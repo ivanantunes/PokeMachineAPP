@@ -1,4 +1,10 @@
+<div class="container-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
 <form class="form-container" [formGroup]="register">
+
+  <a mat-button href="/" class="btn-back"><mat-icon>arrow_back_ios</mat-icon> Voltar</a>
 
   <h1 class="form-title">Dados do Cliente</h1>
 
@@ -34,7 +40,7 @@
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>Data de Aniversário</mat-label>
-    <input matInput [matDatepicker]="date" required formControlName="cli_BIRTHDAY">
+    <input matInput [matDatepicker]="date" readonly required formControlName="cli_BIRTHDAY">
     <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
     <mat-datepicker #date></mat-datepicker>
     <mat-error *ngIf="controls['cli_BIRTHDAY'].errors && controls['cli_BIRTHDAY'].errors.required">

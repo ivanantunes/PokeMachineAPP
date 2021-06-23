@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 
 // ? Ngx
 import { NgxMaskModule } from 'ngx-mask';
+import { ToastrModule } from 'ngx-toastr';
 
 // ? Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,6 +23,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { MatSelectModule } from '@angular/material/select';
 
     // * Export Ngx
     NgxMaskModule,
+    ToastrModule,
 
     // * Export Modules
     MatToolbarModule,
@@ -51,7 +56,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   imports: [
     // * Angular
@@ -62,6 +68,8 @@ import { MatSelectModule } from '@angular/material/select';
 
     // * Ngx
     NgxMaskModule.forRoot(),
+    ToastrModule.forRoot(),
+
 
     // * Material
     MatToolbarModule,
@@ -73,7 +81,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ]
 })
 

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { of, timer } from 'rxjs';
-import { debounce, map, switchMap } from 'rxjs/operators';
+import { interval, Observable, of } from 'rxjs';
+import { catchError, debounce, debounceTime, map, retryWhen, switchMap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-client',
@@ -15,10 +16,9 @@ export class RegisterClientComponent implements OnInit {
 
   public register = new FormGroup({});
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
     this.register = this.fb.group({
       // ? Client
       cli_FULL_NAME: new FormControl('', [Validators.required]),
@@ -41,37 +41,61 @@ export class RegisterClientComponent implements OnInit {
       acc_AGE_ID: new FormControl('', [Validators.required])
     });
 
-    this.register.valueChanges.pipe(
-      debounce(() => timer(500)),
-      switchMap((data) => {
-        if (data.cla_ZIP_CODE)  {
-
-          return this.http.get<any>(`https://viacep.com.br/ws/${data.cla_ZIP_CODE}/json/`).pipe(
-            map((addressData) => {
-              this.register.setValue({
-                ...this.register.value,
-                cla_ADDRESS: addressData.logradouro,
-                cla_CITY: addressData.localidade,
-                cla_DISTRICTY: addressData.bairro,
-                cla_UF: addressData.uf
-              })
-
-            })
-          );
-
+    this.register.controls['cla_ZIP_CODE'].valueChanges.pipe(
+      debounceTime(500),
+      switchMap((zipCode) => {
+        this.isLoading = true;
+        if (zipCode === '') {
+          this.controls['cla_ADDRESS'].setValue('');
+          this.controls['cla_CITY'].setValue('');
+          this.controls['cla_DISTRICTY'].setValue('');
+          this.controls['cla_UF'].setValue('');
+          return of(1);
         }
-        return of(data);
-      })
-    ).subscribe((data) => {
+
+        return this.searchAddress(zipCode).pipe(
+          catchError((err) => {
+            this.toastr.warning('CEP Não Encontrado.', 'Alerta', { progressBar: true });
+            return of(1);
+          })
+        );
+      }),
+    ).subscribe((address) => {
+      this.isLoading = false;
+
+      if (typeof address === 'object') {
+        this.controls['cla_ADDRESS'].setValue(address.address);
+        this.controls['cla_CITY'].setValue(address.city);
+        this.controls['cla_DISTRICTY'].setValue(address.districty);
+        this.controls['cla_UF'].setValue(address.uf);
+      }
 
     }, (err) => {
-      console.log(typeof err === 'object' ? err.error : err);
-    })
+      this.isLoading = false;
+
+      this.toastr.error('Erro Interno.', 'Erro', { progressBar: true });
+
+    });
 
   }
 
   public get controls(): { [key: string]: AbstractControl } {
     return this.register.controls;
+  }
+
+  private searchAddress(zipCode: string): Observable<any> {
+    return this.http.get<any>(`http://viacep.com.br/ws/${zipCode}/json/`).pipe(
+      map((addressData) => {
+
+        return {
+          address: addressData.logradouro,
+          city: addressData.localidade,
+          districty: addressData.bairro,
+          uf: addressData.uf
+        };
+
+      })
+    );
   }
 
   public submit(): void {

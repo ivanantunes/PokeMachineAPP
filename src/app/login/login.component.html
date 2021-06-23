@@ -1,3 +1,14 @@
+
+<div class="container-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="form-container">
+  <a mat-button href="/" class="btn-back"><mat-icon>arrow_back_ios</mat-icon> Voltar</a>
+</div>
+
+<img src="assets/img/pokebola.png" width="200" height="200" class="logo">
+
 <form class="form-container" [formGroup]="login">
 
   <h1 class="form-title">Conectar-se</h1>
