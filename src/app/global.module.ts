@@ -24,7 +24,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatListModule
   ],
   imports: [
     // * Angular
@@ -82,7 +86,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }

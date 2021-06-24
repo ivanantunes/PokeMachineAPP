@@ -17,8 +17,15 @@ const routes: Routes = [
 
   // ? Login
   {
-    path: 'login',
+    path: 'login/:id',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+
+  // ? CashMachine
+
+  {
+    path: 'cashMachine',
+    loadChildren: () => import('./cash-machine/cash-machine.module').then(m => m.CashMachineModule)
   },
 
   // ? Redirect

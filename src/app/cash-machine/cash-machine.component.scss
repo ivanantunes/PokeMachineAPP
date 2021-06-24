@@ -1,0 +1,43 @@
+.cash-link {
+  text-decoration: none;
+  background-color: red;
+}
+
+.cash-link .disabled {
+  cursor: not-allowed;
+}
+
+.cash-container {
+  width: 30vw;
+  float: left;
+  display: inline;
+  margin: 10px;
+}
+
+.cash-header {
+  text-align: center;
+  display: block;
+}
+
+.cash-icon {
+  margin-right: 8px;
+  color: #1b5e20;
+  padding: 7px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  background-color: #e4f0e5;
+}
+
+@media (max-width: 1120px) {
+  .cash-container {
+    width: 45vw;
+  }
+}
+
+@media (max-width: 750px) {
+  .cash-container {
+    width: 100vw;
+    float: inherit;
+  }
+}
