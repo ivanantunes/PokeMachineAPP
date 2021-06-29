@@ -1,9 +1,12 @@
+import { CADFullClient } from './../interfaces/FullClient';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { interval, Observable, of } from 'rxjs';
-import { catchError, debounce, debounceTime, map, retryWhen, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from '../services/api.service';
+import { ModalMaterialService } from 'modal-material';
 
 @Component({
   selector: 'app-register-client',
@@ -16,7 +19,12 @@ export class RegisterClientComponent implements OnInit {
 
   public register = new FormGroup({});
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: ToastrService) { }
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private modal: ModalMaterialService,
+    private api: ApiService) { }
 
   ngOnInit(): void {
     this.register = this.fb.group({
@@ -99,7 +107,68 @@ export class RegisterClientComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log(this.register.value)
+    this.isLoading = true;
+
+    const value = this.register.value;
+
+    const cadFullClient: CADFullClient = {
+      client: {
+        cli_FULL_NAME: value.cli_FULL_NAME,
+        cli_CPF: value.cli_CPF,
+        cli_RG: value.cli_RG,
+        cli_BIRTHDAY: new Date(value.cli_BIRTHDAY).toLocaleDateString()
+      },
+      clientTelephone: {
+        clt_TELEPHONE: value.clt_TELEPHONE
+      },
+      clientAddress: {
+        cla_ADDRESS: value.cla_ADDRESS,
+        cla_CITY: value.cla_CITY,
+        cla_DISTRICTY: value.cla_DISTRICTY,
+        cla_NUMBER: value.cla_NUMBER,
+        cla_UF: value.cla_UF,
+        cla_ZIP_CODE: value.cla_ZIP_CODE
+      },
+      account: {
+        acc_AGE_ID: value.acc_AGE_ID,
+        acc_BALANCE: value.acc_BALANCE,
+        acc_PASSWORD: value.acc_PASSWORD,
+        acc_TYPE: value.acc_TYPE
+      }
+    }
+
+    this.api.registerFullClient(cadFullClient).subscribe((res) => {
+      this.isLoading = false;
+
+      this.modal.mTSuccess({
+        btnCloseTitle: 'Fechar',
+        description: 'Conta Criada com Sucesso!',
+        disableClose: true,
+        height: 'auto',
+        title: 'Sucesso',
+        width: 'auto'
+      });
+      console.log(res)
+
+      this.register.reset();
+
+    }, (err) => {
+      this.isLoading = false;
+
+      this.modal.mTErrorLog({
+        btnCloseTitle: 'Fechar',
+        description: 'Falha ao Criar Conta!',
+        disableClose: true,
+        height: 'auto',
+        title: 'Sucesso',
+        width: 'auto',
+        btnLogTitle: 'Detalhes',
+        log: err.error.message
+      })
+
+      console.log(err)
+    });
+
   }
 
 }

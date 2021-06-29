@@ -15,6 +15,13 @@ const routes: Routes = [
     loadChildren: () => import('./register-client/register-client.module').then(m => m.RegisterClientModule)
   },
 
+  // ? Register - Account
+  {
+    path: 'register/account',
+    loadChildren: () => import('./register-account/register-account.module').then(m => m.RegisterAccountModule)
+  },
+
+
   // ? Login
   {
     path: 'login/:id',
@@ -26,6 +33,12 @@ const routes: Routes = [
   {
     path: 'cashMachine',
     loadChildren: () => import('./cash-machine/cash-machine.module').then(m => m.CashMachineModule)
+  },
+
+  // ? Dashboard
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
 
   // ? Redirect

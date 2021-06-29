@@ -1,0 +1,88 @@
+<div class="container-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<form class="form-container" [formGroup]="register">
+
+  <a mat-button href="/register/client" class="btn-back"><mat-icon>arrow_back_ios</mat-icon> Voltar</a>
+
+  <h1 class="form-title">Dados do Cliente</h1>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>RG</mat-label>
+    <input matInput #rg maxlength="15" required mask="00.000.000-00" formControlName="cli_RG">
+    <mat-icon matSuffix class="form-input-icon">badge</mat-icon>
+    <mat-hint align="end">{{rg.value.length}} / 15</mat-hint>
+    <mat-error *ngIf="controls['cli_RG'].errors && controls['cli_RG'].errors.required">
+      RG é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>CPF</mat-label>
+    <input matInput #cpf maxlength="15" required mask="000.000.000-00" formControlName="cli_CPF">
+    <mat-icon matSuffix class="form-input-icon">assignment</mat-icon>
+    <mat-hint align="end">{{cpf.value.length}} / 15</mat-hint>
+    <mat-error *ngIf="controls['cli_CPF'].errors && controls['cli_CPF'].errors.required">
+      CPF é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <h1 class="form-title">Dados da Conta</h1>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>Senha</mat-label>
+    <input matInput #password type="password" maxlength="32" required formControlName="acc_PASSWORD">
+    <mat-icon matSuffix class="form-input-icon">lock</mat-icon>
+    <mat-hint align="end">{{password.value.length}} / 32</mat-hint>
+    <mat-error *ngIf="controls['acc_PASSWORD'].errors && controls['acc_PASSWORD'].errors.required">
+      Senha é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
+    <mat-label>Tipo de Conta</mat-label>
+    <mat-select required formControlName="acc_TYPE">
+      <mat-option value="P">Conta Poupança</mat-option>
+      <mat-option value="C">Conta Corrente</mat-option>
+    </mat-select>
+    <mat-error *ngIf="controls['acc_TYPE'].errors && controls['acc_TYPE'].errors.required">
+      Tipo de Conta é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-mid form-margin-left">
+    <mat-label>Saldo</mat-label>
+    <input matInput type="number" required min="1" value="1" step="1" formControlName="acc_BALANCE">
+    <mat-icon matSuffix class="form-input-icon">paid</mat-icon>
+    <mat-hint>Saldo Inicial da Conta deve ser pelo menos R$ 1.00</mat-hint>
+    <mat-error *ngIf="controls['acc_BALANCE'].errors && controls['acc_BALANCE'].errors.required">
+      Saldo é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-input-full">
+    <mat-label>Agência</mat-label>
+    <mat-select required formControlName="acc_AGE_ID">
+      <mat-option value="99547">Banco do Brasil S.A</mat-option>
+      <mat-option value="19879">Itaú</mat-option>
+      <mat-option value="16794">Caixa Economica</mat-option>
+      <mat-option value="47244">Santander</mat-option>
+      <mat-option value="10547">Bradesco</mat-option>
+    </mat-select>
+    <mat-error *ngIf="controls['acc_AGE_ID'].errors && controls['acc_AGE_ID'].errors.required">
+      Agência é Obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="btn-margin-rigth" type="submit" [disabled]="register.invalid" (click)="submit()">
+    <mat-icon>add</mat-icon>
+    Cadastrar
+  </button>
+
+  <button mat-raised-button color="warn" (click)="register.reset()">
+    <mat-icon>clear</mat-icon>
+    Limpar Campos
+  </button>
+
+</form>

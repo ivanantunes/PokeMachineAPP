@@ -5,6 +5,7 @@
 <form class="form-container" [formGroup]="register">
 
   <a mat-button href="/" class="btn-back"><mat-icon>arrow_back_ios</mat-icon> Voltar</a>
+  <a mat-button href="/register/account" class="btn-back" style="float: right;">Já sou Cliente <mat-icon>arrow_forward_ios</mat-icon> </a>
 
   <h1 class="form-title">Dados do Cliente</h1>
 
@@ -155,11 +156,11 @@
   <mat-form-field appearance="outline" class="form-input-full">
     <mat-label>Agência</mat-label>
     <mat-select required formControlName="acc_AGE_ID">
-      <mat-option value="99547">Banco do Brasil S.A</mat-option>
-      <mat-option value="19879">Itaú</mat-option>
-      <mat-option value="16794">Caixa Economica</mat-option>
-      <mat-option value="47244">Santander</mat-option>
-      <mat-option value="10547">Bradesco</mat-option>
+      <mat-option value="1">Banco do Brasil S.A - Sorocaba</mat-option>
+      <mat-option value="2">Itaú - Boituva</mat-option>
+      <mat-option value="3">Caixa Economica - Tiête</mat-option>
+      <mat-option value="4">Santander - Sorocaba</mat-option>
+      <mat-option value="5">Bradesco - Sorocaba</mat-option>
     </mat-select>
     <mat-error *ngIf="controls['acc_AGE_ID'].errors && controls['acc_AGE_ID'].errors.required">
       Agência é Obrigatório.

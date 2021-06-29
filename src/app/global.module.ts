@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// ? Services
+import { ApiService } from './services/api.service';
+
 // ? Components
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -11,6 +14,9 @@ import { FooterComponent } from './footer/footer.component';
 // ? Ngx
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+
+// ? My Lib
+import { ModalMaterialModule } from 'modal-material';
 
 // ? Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,7 +33,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
-
 
 @NgModule({
   declarations: [
@@ -47,6 +52,9 @@ import { MatListModule } from '@angular/material/list';
     // * Export Ngx
     NgxMaskModule,
     ToastrModule,
+
+    // * My Lib
+    ModalMaterialModule,
 
     // * Export Modules
     MatToolbarModule,
@@ -91,6 +99,7 @@ import { MatListModule } from '@angular/material/list';
     MatListModule
   ],
   providers: [
+    ApiService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ]
 })
