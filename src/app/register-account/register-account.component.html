@@ -10,7 +10,7 @@
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>RG</mat-label>
-    <input matInput #rg maxlength="15" required mask="00.000.000-00" formControlName="cli_RG">
+    <input matInput #rg maxlength="15" required mask="00.000.000-09" formControlName="cli_RG">
     <mat-icon matSuffix class="form-input-icon">badge</mat-icon>
     <mat-hint align="end">{{rg.value.length}} / 15</mat-hint>
     <mat-error *ngIf="controls['cli_RG'].errors && controls['cli_RG'].errors.required">
@@ -64,11 +64,11 @@
   <mat-form-field appearance="outline" class="form-input-full">
     <mat-label>Agência</mat-label>
     <mat-select required formControlName="acc_AGE_ID">
-      <mat-option value="99547">Banco do Brasil S.A</mat-option>
-      <mat-option value="19879">Itaú</mat-option>
-      <mat-option value="16794">Caixa Economica</mat-option>
-      <mat-option value="47244">Santander</mat-option>
-      <mat-option value="10547">Bradesco</mat-option>
+      <mat-option value="1">Banco do Brasil S.A - Sorocaba</mat-option>
+      <mat-option value="2">Itaú - Boituva</mat-option>
+      <mat-option value="3">Caixa Economica - Tiête</mat-option>
+      <mat-option value="4">Santander - Sorocaba</mat-option>
+      <mat-option value="5">Bradesco - Sorocaba</mat-option>
     </mat-select>
     <mat-error *ngIf="controls['acc_AGE_ID'].errors && controls['acc_AGE_ID'].errors.required">
       Agência é Obrigatório.

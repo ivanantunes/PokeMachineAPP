@@ -1,16 +1,25 @@
+<div style="display: flex;">
+  <a mat-button href="/"><mat-icon>arrow_back_ios</mat-icon> Voltar</a>
+</div>
+
+<div class="container-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
 <div class="cash-container" *ngFor="let row of arrCashMachine">
-  <a *ngIf="row.status" [routerLink]="'/login/' + row.id" class="cash-link">
-    <ng-component *ngIf="!row.status else cardMachine"></ng-component>
+
+  <a *ngIf="row.csm_STATUS === 'AT'" [routerLink]="'/login/' + row.csm_ID" class="cash-link">
+    <ng-component *ngIf="row.csm_STATUS === 'DISPLAY' else cardMachine"></ng-component>
   </a>
 
-  <a *ngIf="!row.status" class="cash-link">
-    <ng-component *ngIf="row.status else cardMachine"></ng-component>
+  <a *ngIf="row.csm_STATUS !== 'AT'" class="cash-link">
+    <ng-component *ngIf="row.csm_STATUS === 'DISPLAY' else cardMachine"></ng-component>
   </a>
 
   <ng-template #cardMachine>
     <mat-card class="mat-elevation-z3">
       <mat-card-header class="cash-header">
-        <mat-card-title>{{row.name}}</mat-card-title>
+        <mat-card-title>{{row.csm_NAME}}</mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
@@ -19,15 +28,15 @@
 
           <mat-list-item>
             <mat-icon class="cash-icon"
-              [ngStyle]="row.status ? {color: '#1b5e20'} : { color: 'rgba(209, 15, 15, 0.8)', 'background-color': 'rgba(209, 15, 15, 0.5)' }">
-              {{row.status ? 'radio_button_checked' : 'radio_button_unchecked' }}
+              [ngStyle]="row.csm_STATUS === 'AT' ? {color: '#1b5e20'} : { color: 'rgba(209, 15, 15, 0.8)', 'background-color': 'rgba(209, 15, 15, 0.5)' }">
+              {{row.csm_STATUS === 'AT' ? 'radio_button_checked' : 'radio_button_unchecked' }}
             </mat-icon>
-            <strong>Status do Serviço</strong>: {{row.status ? 'Online' : 'Offline'}}
+            <strong>Status do Serviço</strong>: {{row.csm_STATUS === 'AT' ? 'Online' : 'Offline'}}
           </mat-list-item>
 
           <mat-list-item>
-            <mat-icon class="cash-icon" [ngStyle]="row.available > 0 ? {color: '#1b5e20'} : { color: 'rgba(209, 15, 15, 0.8)', 'background-color': 'rgba(209, 15, 15, 0.5)' }">local_atm</mat-icon>
-            <strong>Saldo Dísponivel</strong>: {{formatterCash(row.available)}}
+            <mat-icon class="cash-icon" [ngStyle]="row.csm_AVAILABLE_VALUE > 0 ? {color: '#1b5e20'} : { color: 'rgba(209, 15, 15, 0.8)', 'background-color': 'rgba(209, 15, 15, 0.5)' }">local_atm</mat-icon>
+            <strong>Saldo Dísponivel</strong>: {{formatterCash(row.csm_AVAILABLE_VALUE)}}
           </mat-list-item>
 
         </mat-list>

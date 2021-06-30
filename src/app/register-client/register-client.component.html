@@ -21,7 +21,7 @@
 
   <mat-form-field appearance="outline" class="form-input-mid form-margin-right">
     <mat-label>RG</mat-label>
-    <input matInput #rg maxlength="15" required mask="00.000.000-00" formControlName="cli_RG">
+    <input matInput #rg maxlength="15" required mask="00.000.000-09" formControlName="cli_RG">
     <mat-icon matSuffix class="form-input-icon">badge</mat-icon>
     <mat-hint align="end">{{rg.value.length}} / 15</mat-hint>
     <mat-error *ngIf="controls['cli_RG'].errors && controls['cli_RG'].errors.required">

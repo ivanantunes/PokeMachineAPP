@@ -1,4 +1,6 @@
+import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { ModalMaterialService } from 'modal-material';
 
 @Component({
   selector: 'app-cash-machine',
@@ -7,19 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CashMachineComponent implements OnInit {
 
+  public isLoading = true;
+
   public currentDateTime = new Date().toLocaleString();
 
-  public arrCashMachine = [
-    { id: 1, name: 'Caixa Eletrônico - 1', available: 10000, status: true },
-    { id: 2, name: 'Caixa Eletrônico - 2', available: 5400, status: false },
-    { id: 3, name: 'Caixa Eletrônico - 3', available: 12847, status: true },
-    { id: 4, name: 'Caixa Eletrônico - 4', available: 1200, status: false },
-    { id: 5, name: 'Caixa Eletrônico - 5', available: 0, status: true },
-  ];
+  public arrCashMachine: any[] = [];
 
-  constructor() { }
+  constructor(private api: ApiService, private modal: ModalMaterialService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+    this.api.cashMachine().subscribe((res) => {
+      this.arrCashMachine = res;
+      this.isLoading = false;
+    }, (err) => {
+      this.isLoading = false;
+
+      this.modal.mTError({
+        btnCloseTitle: 'Fechar',
+        description: 'Falha ao Buscar Caixa Eletrônicos.',
+        disableClose: true,
+        height: 'auto',
+        title: 'Erro',
+        width: 'auto'
+      });
+    });
+
+  }
 
   // ? Formmaters
   public formatterCash(value: number): string {

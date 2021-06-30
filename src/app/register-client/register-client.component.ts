@@ -148,9 +148,10 @@ export class RegisterClientComponent implements OnInit {
         title: 'Sucesso',
         width: 'auto'
       });
-      console.log(res)
 
-      this.register.reset();
+      setInterval(() => {
+        window.location.href = '/';
+      }, 1500);
 
     }, (err) => {
       this.isLoading = false;
