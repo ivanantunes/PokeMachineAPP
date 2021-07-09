@@ -1,11 +1,17 @@
+import { CashMachineComponent } from './cash-machine/cash-machine.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterAccountComponent } from './register-account/register-account.component';
+import { PokebolaActionsComponent } from './pokebola-actions/pokebola-actions.component';
 // ? Angular
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // ? Services
 import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
+
 
 // ? Components
 import { HeaderComponent } from './header/header.component';
@@ -33,11 +39,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
+import { RegisterClientComponent } from './register-client/register-client.component';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     HeaderComponent,
     FooterComponent,
+    PokebolaActionsComponent,
+    RegisterClientComponent,
+    RegisterAccountComponent,
+    LoginComponent,
+    CashMachineComponent
   ],
   exports: [
     // * Angular
@@ -48,6 +61,11 @@ import { MatListModule } from '@angular/material/list';
     // * Export Components
     HeaderComponent,
     FooterComponent,
+    PokebolaActionsComponent,
+    RegisterClientComponent,
+    RegisterAccountComponent,
+    LoginComponent,
+    CashMachineComponent,
 
     // * Export Ngx
     NgxMaskModule,
@@ -100,6 +118,7 @@ import { MatListModule } from '@angular/material/list';
   ],
   providers: [
     ApiService,
+    AuthService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ]
 })

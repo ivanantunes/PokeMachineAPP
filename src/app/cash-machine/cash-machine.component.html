@@ -8,7 +8,7 @@
 
 <div class="cash-container" *ngFor="let row of arrCashMachine">
 
-  <a *ngIf="row.csm_STATUS === 'AT'" [routerLink]="'/login/' + row.csm_ID" class="cash-link">
+  <a *ngIf="row.csm_STATUS === 'AT'" [href]="'/login/' + row.csm_ID" class="cash-link">
     <ng-component *ngIf="row.csm_STATUS === 'DISPLAY' else cardMachine"></ng-component>
   </a>
 

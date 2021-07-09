@@ -1,5 +1,9 @@
+import { ModalMaterialService } from 'modal-material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as uuid from 'uuid';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +16,22 @@ export class LoginComponent implements OnInit {
 
   public login = new FormGroup({});
 
-  constructor(private fb: FormBuilder) { }
+  private cashID: number | undefined;
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,
+    private modal: ModalMaterialService) { }
 
   ngOnInit(): void {
+
+    this.route.paramMap.subscribe((params) => {
+
+      this.cashID = Number(params.get('id'));
+
+    })
 
     this.login = this.fb.group({
       // ? Account
@@ -29,7 +46,35 @@ export class LoginComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log(this.login.value);
+    this.isLoading = true;
+
+    const object = {
+      acc_CODE: this.login.value.acc_CODE,
+      acc_PASSWORD: this.login.value.acc_PASSWORD,
+      csm_ID: this.cashID,
+      token: uuid.v4()
+    }
+
+    this.authService.login(object).subscribe((res) => {
+      this.isLoading = false;
+
+      delete object.acc_PASSWORD;
+
+      this.authService.startSession(object);
+
+      this.router.navigate(['/dashboard'])
+    }, (err) => {
+      this.isLoading = false;
+      this.modal.mTError({
+        btnCloseTitle: 'Fechar',
+        description: 'Falha ao Efeturar Login.',
+        disableClose: true,
+        title: 'Erro',
+        height: 'auto',
+        width: 'auto'
+      })
+    })
+
   }
 
 }

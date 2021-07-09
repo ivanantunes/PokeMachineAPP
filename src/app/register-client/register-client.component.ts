@@ -142,16 +142,15 @@ export class RegisterClientComponent implements OnInit {
 
       this.modal.mTSuccess({
         btnCloseTitle: 'Fechar',
-        description: 'Conta Criada com Sucesso!',
+        description: `Conta ${res.result} Criada com Sucesso!`,
         disableClose: true,
         height: 'auto',
         title: 'Sucesso',
         width: 'auto'
       });
 
-      setInterval(() => {
-        window.location.href = '/';
-      }, 1500);
+      this.register.reset();
+      this.register.markAsUntouched();
 
     }, (err) => {
       this.isLoading = false;
