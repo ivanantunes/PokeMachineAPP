@@ -31,7 +31,7 @@
               [ngStyle]="row.csm_STATUS === 'AT' ? {color: '#1b5e20'} : { color: 'rgba(209, 15, 15, 0.8)', 'background-color': 'rgba(209, 15, 15, 0.5)' }">
               {{row.csm_STATUS === 'AT' ? 'radio_button_checked' : 'radio_button_unchecked' }}
             </mat-icon>
-            <strong>Status do Serviço</strong>: {{row.csm_STATUS === 'AT' ? 'Online' : 'Offline'}}
+            <strong>Status do Serviço</strong>: {{row.csm_STATUS === 'AT' ? 'Online' : row.csm_STATUS === 'EU' ? 'Em Uso' : 'Offline' }}
           </mat-list-item>
 
           <mat-list-item>

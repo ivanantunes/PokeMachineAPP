@@ -1,9 +1,11 @@
+import { switchMap } from 'rxjs/operators';
 import { ModalMaterialService } from 'modal-material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as uuid from 'uuid';
 import { AuthService } from '../services/auth.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private router: Router,
+    private api: ApiService,
     private modal: ModalMaterialService) { }
 
   ngOnInit(): void {
@@ -55,7 +58,9 @@ export class LoginComponent implements OnInit {
       token: uuid.v4()
     }
 
-    this.authService.login(object).subscribe((res) => {
+    this.authService.login(object).pipe(
+      switchMap(() => this.api.accountInfo(object.token))
+    ).subscribe((res) => {
       this.isLoading = false;
 
       this.authService.startSession({...res.result, token: object.token});

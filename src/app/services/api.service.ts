@@ -1,7 +1,7 @@
 import { CashMachine } from './../interfaces/CashMachine';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CADAccount, CADFullClient } from '../interfaces';
 
@@ -22,6 +22,12 @@ export class ApiService {
 
   public cashMachine(): Observable<CashMachine[]> {
     return this.http.get<any[]>(`${environment.url}all/cashMachine`);
+  }
+
+  public accountInfo(token: string): Observable<any> {
+    return this.http.get<any>(`${environment.url}account/info`, {
+      headers: new HttpHeaders().set('token', token)
+    })
   }
 
 }
