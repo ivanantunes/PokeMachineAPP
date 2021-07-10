@@ -58,20 +58,20 @@ export class LoginComponent implements OnInit {
     this.authService.login(object).subscribe((res) => {
       this.isLoading = false;
 
-      delete object.acc_PASSWORD;
+      this.authService.startSession({...res.result, token: object.token});
 
-      this.authService.startSession(object);
-
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/dashboard']);
     }, (err) => {
       this.isLoading = false;
-      this.modal.mTError({
+      this.modal.mTErrorLog({
         btnCloseTitle: 'Fechar',
         description: 'Falha ao Efeturar Login.',
         disableClose: true,
         title: 'Erro',
         height: 'auto',
-        width: 'auto'
+        width: 'auto',
+        btnLogTitle: 'Detalhes',
+        log: err.error.message
       })
     })
 

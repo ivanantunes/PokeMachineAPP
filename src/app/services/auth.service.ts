@@ -35,7 +35,7 @@ export class AuthService {
 
     if (this.isAuthenticated) {
         return new HttpHeaders({
-            TOKEN: this.currentSession.token,
+            TOKEN: this.currentSession.token
         });
     } else {
         return new HttpHeaders();

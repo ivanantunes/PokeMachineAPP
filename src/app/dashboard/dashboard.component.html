@@ -3,22 +3,22 @@
   <mat-card-header>
 
     <div mat-card-avatar class="header-client-image"></div>
-    <mat-card-title>Nome do Cliente</mat-card-title>
+    <mat-card-title>{{auth.currentSession.client.cli_FULL_NAME}}</mat-card-title>
     <mat-card-subtitle>
       <mat-icon>account_balance</mat-icon>
-      <span class="header-client-balance">Banco do Brasil S.A</span>
+      <span class="header-client-balance">Nome da Agencia</span>
     </mat-card-subtitle>
 
     <div class="spacer"></div>
 
     <div class="header-client-margin-left header-client-icons">
       <mat-icon>badge</mat-icon>
-      <span class="header-client-balance">000000</span>
+      <span class="header-client-balance">{{auth.currentSession.account.acc_CODE}}</span>
     </div>
 
     <div class="header-client-margin-left header-client-icons">
       <mat-icon>account_balance_wallet</mat-icon>
-      <span class="header-client-balance">{{formatterCash(16000)}}</span>
+      <span class="header-client-balance">{{formatterCash(auth.currentSession.account.acc_BALANCE)}}</span>
     </div>
 
   </mat-card-header>
@@ -58,7 +58,7 @@
             <div class="section">0000</div>
           </div>
           <div class="end"><span class="end-text">exp. end:</span><span class="end-date"> 11/22</span></div>
-          <div class="card-holder">nome do cliente</div>
+          <div class="card-holder">{{auth.currentSession.client.cli_FULL_NAME}}</div>
           <div class="master">
             <div class="circle master-red"></div>
             <div class="circle master-yellow"></div>
