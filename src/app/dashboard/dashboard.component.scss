@@ -1,6 +1,11 @@
 .container-main {
-  width: 60%;
+  display: table;
+  width: 65%;
   margin: auto;
+}
+
+.btn-back {
+  margin-bottom: 15px;
 }
 
 .header-client-image {

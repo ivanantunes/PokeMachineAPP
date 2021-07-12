@@ -46,7 +46,7 @@ export class AuthService {
   public destroyCurrentSession(): void {
     localStorage.removeItem('currentSession');
     this.currentSession = undefined;
-    this.route.navigate(['/login']);
+    this.route.navigate(['/cashMachine']);
   }
 
   public login(loginObj: any): Observable<any> {

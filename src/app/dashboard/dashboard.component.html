@@ -1,24 +1,28 @@
+<div class="container-main">
+  <button mat-button class="btn-back" (click)="logout()"><mat-icon>arrow_back_ios</mat-icon> Sair</button>
+</div>
+
 <mat-card class="container-main mat-elevation-z4">
 
   <mat-card-header>
 
     <div mat-card-avatar class="header-client-image"></div>
-    <mat-card-title>{{auth.currentSession.client.cli_FULL_NAME}}</mat-card-title>
+    <mat-card-title>{{session.client.cli_FULL_NAME}}</mat-card-title>
     <mat-card-subtitle>
       <mat-icon>account_balance</mat-icon>
-      <span class="header-client-balance">{{auth.currentSession.agency.age_NAME}}</span>
+      <span class="header-client-balance">{{session.agency.age_NAME}}</span>
     </mat-card-subtitle>
 
     <div class="spacer"></div>
 
     <div class="header-client-margin-left header-client-icons">
       <mat-icon>badge</mat-icon>
-      <span class="header-client-balance">{{auth.currentSession.account.acc_CODE}}</span>
+      <span class="header-client-balance">{{session.account.acc_CODE}}</span>
     </div>
 
     <div class="header-client-margin-left header-client-icons">
       <mat-icon>account_balance_wallet</mat-icon>
-      <span class="header-client-balance">{{formatterCash(auth.currentSession.account.acc_BALANCE)}}</span>
+      <span class="header-client-balance">{{formatterCash(session.account.acc_BALANCE)}}</span>
     </div>
 
   </mat-card-header>
@@ -58,7 +62,7 @@
             <div class="section">0000</div>
           </div>
           <div class="end"><span class="end-text">exp. end:</span><span class="end-date"> 11/22</span></div>
-          <div class="card-holder">{{auth.currentSession.client.cli_FULL_NAME}}</div>
+          <div class="card-holder">{{session.client.cli_FULL_NAME}}</div>
           <div class="master">
             <div class="circle master-red"></div>
             <div class="circle master-yellow"></div>
