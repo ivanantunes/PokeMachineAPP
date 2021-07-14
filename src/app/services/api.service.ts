@@ -37,4 +37,22 @@ export class ApiService {
     })
   }
 
+  public debit(value: number): Observable<any> {
+    return this.http.post<any>(`${environment.url}transfer/debit`, value, {
+      headers: this.auth.getAuthHeaders()
+    });
+  }
+
+  public credit(value: number): Observable<any> {
+    return this.http.post<any>(`${environment.url}transfer/credit`, value, {
+      headers: this.auth.getAuthHeaders()
+    });
+  }
+
+  public transfer(value: any): Observable<any> {
+    return this.http.post<any>(`${environment.url}transfer/transfer`, value, {
+      headers: this.auth.getAuthHeaders()
+    });
+  }
+
 }

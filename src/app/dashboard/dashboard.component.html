@@ -1,3 +1,7 @@
+<div class="container-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
 <div class="container-main">
   <button mat-button class="btn-back" (click)="logout()"><mat-icon>arrow_back_ios</mat-icon> Sair</button>
 </div>
@@ -81,21 +85,96 @@
     <!-- ? Actions -->
 
     <div style="margin: 15px auto; display: table;">
-      <button mat-raised-button class="container-actions">
+      <button mat-raised-button class="container-actions" (click)="setStatus('credit')">
         <mat-icon class="container-actions-icon">savings</mat-icon>
         <span class="container-actions-text">Depósito</span>
       </button>
 
-      <button mat-raised-button class="container-actions">
+      <button mat-raised-button class="container-actions" (click)="setStatus('debit')">
         <mat-icon class="container-actions-icon">point_of_sale</mat-icon>
         <span class="container-actions-text">Saque</span>
       </button>
 
-      <button mat-raised-button class="container-actions">
+      <button mat-raised-button class="container-actions" (click)="setStatus('transfer')">
         <mat-icon class="container-actions-icon">price_change</mat-icon>
         <span class="container-actions-text">Transferência</span>
       </button>
     </div>
+
+    <!-- ? Form de Depósito / Crédito -->
+
+    <mat-card class="mat-elevation-z3" *ngIf="isCredit || isDebit">
+
+      <form class="form-container" [formGroup]="operator">
+        <h1 class="form-title">Operação</h1>
+
+        <mat-form-field appearance="outline" class="form-input-full">
+          <mat-label>Valor</mat-label>
+          <input matInput #creditValue min="0" type="number" required formControlName="valueOperator">
+          <mat-icon matSuffix class="form-input-icon">attach_money</mat-icon>
+          <mat-error *ngIf="controls['valueOperator'].errors && controls['valueOperator'].errors.required">
+            Valor é Obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" *ngIf="isCredit" class="btn-margin-rigth" type="submit" [disabled]="operator.invalid" (click)="submit('credit')">
+          <mat-icon>send</mat-icon>
+          Enviar
+        </button>
+
+        <button mat-raised-button color="primary" *ngIf="isDebit" class="btn-margin-rigth" type="submit" [disabled]="operator.invalid" (click)="submit('debit')">
+          <mat-icon>send</mat-icon>
+          Enviar
+        </button>
+
+        <button mat-raised-button color="warn" (click)="operator.reset()">
+          <mat-icon>clear</mat-icon>
+          Limpar Campos
+        </button>
+
+      </form>
+
+    </mat-card>
+
+    <!-- ? Form de Transferencia -->
+
+    <mat-card class="mat-elevation-z3" *ngIf="isTransfer">
+
+      <form class="form-container" [formGroup]="formTransfer">
+        <h1 class="form-title">Operação</h1>
+
+        <mat-form-field appearance="outline" class="form-input-full">
+          <mat-label>Conta</mat-label>
+          <input matInput #code maxlength="15" required formControlName="account_code">
+          <mat-icon matSuffix class="form-input-icon">vpn_key</mat-icon>
+          <mat-hint align="end">{{code.value.length}} / 15</mat-hint>
+          <mat-error *ngIf="controlsTransfer['account_code'].errors && controlsTransfer['account_code'].errors.required">
+            Conta é Obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-full">
+          <mat-label>Valor</mat-label>
+          <input matInput #value min="0" type="number" required formControlName="value">
+          <mat-icon matSuffix class="form-input-icon">attach_money</mat-icon>
+          <mat-error *ngIf="controlsTransfer['value'].errors && controlsTransfer['value'].errors.required">
+            Valor é Obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="btn-margin-rigth" type="submit" [disabled]="formTransfer.invalid" (click)="submit('transfer')">
+          <mat-icon>send</mat-icon>
+          Enviar
+        </button>
+
+        <button mat-raised-button color="warn" (click)="operator.reset()">
+          <mat-icon>clear</mat-icon>
+          Limpar Campos
+        </button>
+
+      </form>
+
+    </mat-card>
 
   </mat-card-content>
 
