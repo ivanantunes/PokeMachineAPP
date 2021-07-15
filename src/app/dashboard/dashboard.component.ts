@@ -46,6 +46,21 @@ export class DashboardComponent implements OnInit {
       value: new FormControl('', [Validators.required]),
     });
 
+    this.api.accountInfo(this.auth.currentSession.token).subscribe((info) => {
+      this.session =  { ...info.result, token: this.auth.currentSession.token };
+    }, (err) => {
+      this.modal.mTErrorLog({
+        btnCloseTitle: 'Fechar',
+        btnLogTitle: 'Detalhes',
+        description: 'Falha ao Pegar Informações.',
+        disableClose: true,
+        height: 'auto',
+        log: err.error.message,
+        title: 'Erro',
+        width: 'auto'
+      })
+    })
+
   }
 
   public logout(): void {
